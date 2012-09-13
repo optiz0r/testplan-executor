@@ -1,0 +1,38 @@
+/**
+ * Testplan Executor stylesheet
+ *
+ */
+@CHARSET "UTF-8";
+
+@media all {
+    body {
+        padding-top: 60px;
+        font-family: verdana, helvetica, sans-serif;
+    }
+
+    textarea {
+        font-family: consolas, courier-new, monospace;
+    }
+
+    footer {
+        text-align: center;
+        font-size: smaller;
+        color: grey;
+    }
+
+    .code {
+        white-space: pre;
+    }
+
+} 
+
+@media print {
+    .no-print {
+        display: none;
+    }
+
+    body {
+        margin: 0;
+    }
+}
+

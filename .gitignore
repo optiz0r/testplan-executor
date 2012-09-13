@@ -1,0 +1,9 @@
+# project files
+.buildpath
+.project
+.settings
+*.kdev4
+
+
+# Temporary files
+tmp/*

@@ -1,0 +1,5 @@
+hostname = localhost
+username = testplan
+password = changeme
+dbname   = testplan
+

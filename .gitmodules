@@ -1,0 +1,6 @@
+[submodule "externals/sihnon-js-lib"]
+	path = externals/sihnon-js-lib
+	url = https://github.com/optiz0r/sihnon-js-lib
+[submodule "externals/sihnon-php-lib"]
+	path = externals/sihnon-php-lib
+	url = https://github.com/optiz0r/sihnon-php-lib
