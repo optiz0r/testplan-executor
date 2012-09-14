@@ -11,6 +11,6 @@ if (isset($_SERVER['TPE_CONFIG']) &&
 require_once SihnonFramework_Lib . 'SihnonFramework/Main.class.php';
 
 SihnonFramework_Main::registerAutoloadClasses('SihnonFramework', SihnonFramework_Lib,
-                                              'TPE', StatusBoard_Lib);
+                                              'TPE', TPE_Lib);
 
 ?>
