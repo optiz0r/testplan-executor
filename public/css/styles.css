@@ -18,10 +18,19 @@
         text-align: center;
         font-size: smaller;
         color: grey;
+        margin-top: 5em;
     }
 
     .code {
         white-space: pre;
+    }
+
+    .header {
+        margin-bottom: 2em;
+    }
+
+    .icon {
+        text-align: center;
     }
 
 } 

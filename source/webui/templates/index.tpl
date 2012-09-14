@@ -24,7 +24,7 @@
         <div class="navbar navbar-fixed-top navbar-inverse no-print">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="brand" href="#">TPE</a>
+                    <a class="brand" href="{$base_uri}home/">TPE</a>
                     {$page->include_template('fragments/navigation')}
                 </div>
             </div>
