@@ -4,6 +4,11 @@
 .settings
 *.kdev4
 
+# Configuration Files
+public/.htaccess
+
+# Placeholder for libraries not available on the system
+source/lib/smarty
 
 # Temporary files
 tmp/*
