@@ -23,6 +23,7 @@
 
     .code {
         white-space: pre;
+        font-family: monospace;
     }
 
     .header {
@@ -31,6 +32,14 @@
 
     .icon {
         text-align: center;
+    }
+    
+    .testplan {
+        font-weight: bold;
+    }
+    
+    .device {
+        font-style: italic;
     }
 
 } 

@@ -3,6 +3,11 @@
     <head>
         <title>Testplan Executor</title>
 
+        <script type="text/javascript">
+            var base_uri = "{$base_uri|escape:'quote'}";
+            var base_url = "{$base_url|escape:'quote'}";
+        </script>
+        
         <!-- JQuery //-->
         <script src="{$base_uri}lib/jquery/js/jquery-1.8.1.min.js"></script>
 

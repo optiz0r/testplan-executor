@@ -6,6 +6,7 @@
 
 # Configuration Files
 public/.htaccess
+public/js/*.json
 
 # Placeholder for libraries not available on the system
 source/lib/smarty
