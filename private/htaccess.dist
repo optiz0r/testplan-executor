@@ -7,7 +7,7 @@ SetEnv TPE_CONFIG /etc/testplan-executor/config.php
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(ajax/.*)$ a.php?l=$1 [L]
+    RewriteRule ^ajax/(.*)$ a.php?l=$1 [L]
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
