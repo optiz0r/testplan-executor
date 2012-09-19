@@ -57,8 +57,30 @@ function testplanGenerator($scope, $http) {
     }
     
     $scope.executeTestplan = function() {
+        var devices = [];
+        if ($scope.testplans.length > 0) {
+            for (var i = 0, testplan = $scope.testplans[0]; i < $scope.testplans.length; ++i, testplan = $scope.testplans[i]) {
+                if (testplan.devices.length > 0) {
+                    for (var j = 0, device = testplan.devices[0]; j < testplan.devices.length; ++j, device = testplan.devices[j]) {
+                        commands = [];
+                        if (device.commands.length > 0) {
+                            for (var k = 0, command = device.commands[0]; k < device.commands.length; ++k, command = device.commands[k]) {
+                                commands.push($scope.generateCommand(command, command.value));
+                            }
+                        }
+                        if (commands.length > 0) {
+                            devices.push({
+                                hostname: device,
+                                script: commands
+                            });
+                        }
+                    }
+                }
+            }
+        }
+        
         $http.post(base_uri + 'ajax/api/queue-execution/', {
-            "testplans": $scope.testplans
+            devices: devices
         }).success(function(data, status, headers, config) {
             console.log(status, data);
         }).error(function(data, status, headers, config) {
@@ -91,7 +113,7 @@ function testplanGenerator($scope, $http) {
     $scope.addDevice = function(testplan) {
         testplan.devices.push({
             "name": testplan.newHostname,
-            "commands": jQuery.extend(true, {}, testplan.newDeviceType.commands)
+            "commands": jQuery.extend(true, [], testplan.newDeviceType.commands)
         });
         testplan.newHostname = '';
     }

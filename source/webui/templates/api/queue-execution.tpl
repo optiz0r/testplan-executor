@@ -1,1 +1,1 @@
-"response": {$testplans}
+"success": {$success|json_encode}
