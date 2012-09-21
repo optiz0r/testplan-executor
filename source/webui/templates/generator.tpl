@@ -6,6 +6,19 @@
             <div class="row">
                 <form class="form-horizontal">
                     <fieldset>
+                        <legend>Details</legend>
+                        <div class="control-group">
+                            <label class="control-label">Reference</label>
+                            <div class="controls">
+                                <input type="text" value="" placeholder="" ng-model="reference"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="row">
+                <form class="form-horizontal">
+                    <fieldset>
                         <legend>Add new template</legend>
                         <div class="control-group">
                             <label class="control-label">Filter</label>

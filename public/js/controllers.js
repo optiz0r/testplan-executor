@@ -80,6 +80,7 @@ function testplanGenerator($scope, $http) {
         }
         
         $http.post(base_uri + 'ajax/api/queue-execution/', {
+            reference: $scope.reference,
             devices: devices
         }).success(function(data, status, headers, config) {
             console.log(status, data);
