@@ -103,12 +103,20 @@ function testplanGenerator($scope, $http) {
                         commands = [];
                         if (device.commands.length > 0) {
                             for (var k = 0, command = device.commands[0]; k < device.commands.length; ++k, command = device.commands[k]) {
-                                commands.push($scope.generateCommand(command, command.value));
+                                if (command.ui == 'list') {
+                                    if (command.listItems.length > 0) {
+                                        for (var l = 0, listItem = command.listItems[0]; l < command.listItems.length; ++l, listItem = command.listItems[l]) {
+                                            commands.push($scope.generateCommand(command, $scope.commandValue(command.listItemUi, listItem)));
+                                        }
+                                    }
+                                } else {
+                                    commands.push($scope.generateCommand(command, $scope.commandValue(command.ui, command)));
+                                }
                             }
                         }
                         if (commands.length > 0) {
                             devices.push({
-                                hostname: device,
+                                hostname: device.name,
                                 script: commands
                             });
                         }
@@ -126,6 +134,14 @@ function testplanGenerator($scope, $http) {
         }).error(function(data, status, headers, config) {
             console.log(status, data);
         });
+    }
+    
+    $scope.commandValue = function(ui, item) {
+        switch (ui) {
+            default: {
+                return item.value;
+            }
+        }
     }
     
     $scope.nothidden = function(input) {

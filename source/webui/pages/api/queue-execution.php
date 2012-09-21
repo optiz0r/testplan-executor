@@ -20,12 +20,21 @@ try {
     if (is_null($data)) {
         throw new TPE_Exception_InvalidParameters("data");
     }
+    if ( ! isset($data->devices)) {
+        throw new TPE_Exception_InvalidParameters('data.devices');
+    }
+    if ( ! isset($data->reference)) {
+        throw new TPE_Exception_InvalidParameters('data.reference');
+    }
+    if ( ! isset($data->executionType)) {
+        throw new TPE_Exception_InvalidParameters('data.executionType');
+    }
     
-    $testplan = TPE_Testplan::createForUser($user);
+    $testplan = TPE_Testplan::createForUser($user, $data->reference, $data->executionType);
     
     foreach ($data->devices as $details) {
         $device = TPE_Device::createFromHostname($details->hostname);
-        $testplan->addDeviceScript($device, $details->script);
+        $testplan->addDeviceScript($device, implode("\n", $details->script));
     }
     
     $success = true;
@@ -38,6 +47,7 @@ try {
     $success = false;
 } catch (SihnonFramework_Exception_DatabaseException $e) {
     $messages[] = "Database error " . $e->getMessage();
+    var_dump($e);
     $success = false;
 }
 
