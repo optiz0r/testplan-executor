@@ -3,6 +3,7 @@ function testplanGenerator($scope, $http) {
     $scope.dev = true;
     
     $scope.commands = {};
+    $scope.devices = [];
     
     $scope.templates = [];
     $scope.selectedTemplate = undefined;
@@ -31,6 +32,10 @@ function testplanGenerator($scope, $http) {
 
     $http.get(base_uri + 'js/commands.json').success(function(data) {
         $scope.commands = data;
+    });
+    
+    $http.get(base_uri + 'ajax/api/list-devices/').success(function(data) {
+        $scope.devices = data.devices;
     });
     
     $http.get(base_uri + 'js/templates.json').success(function(data) {
