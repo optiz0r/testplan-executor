@@ -13,6 +13,15 @@
                                 <input type="text" value="" placeholder="" ng-model="reference"/>
                             </div>
                         </div>
+                        <div class="control-group">
+                            <label class="control-label">Execution Type</label>
+                            <div class="controls">
+                                <label class="radio" ng-repeat="type in executionTypes">
+                                    <input type="radio" name="executionType" value="{literal}{{type.value}}{/literal}" ng-model="selectedExecutionType" ng-checked="type.value == selectedExecutionType">
+                                    {literal}{{type.label}}{/literal}
+                                </label>
+                            </div>
+                        </div>
                     </fieldset>
                 </form>
             </div>
@@ -154,7 +163,7 @@
     <ng-switch on="command.listItemUi">
         <div ng-switch-when="text">
             <div class="controls">
-                <input type="text" ng-model="command.newListItemValue" />
+                <input type="text" ng-model="command.newListItemValue" placeholder="{literal}{{command.listItemPlaceholder}}{/literal}" />
             </div>
             <div class="controls">
                 <button class="btn btn-secondary" ng-click="addListItem(command)">
