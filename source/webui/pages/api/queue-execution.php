@@ -47,7 +47,6 @@ try {
     $success = false;
 } catch (SihnonFramework_Exception_DatabaseException $e) {
     $messages[] = "Database error " . $e->getMessage();
-    var_dump($e);
     $success = false;
 }
 
