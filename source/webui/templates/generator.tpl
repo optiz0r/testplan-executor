@@ -30,14 +30,9 @@
                     <fieldset>
                         <legend>Add new template</legend>
                         <div class="control-group">
-                            <label class="control-label">Filter</label>
-                            <div class="controls">
-                                <input type="text" value="" placeholder="Search:" ng-model="query.name" class="search-query">
-                            </div>
-                        </div>
-                        <div class="control-group">
                             <label class="control-label">Name</label>
                             <div class="controls">
+                            <input type="text" class="span1" value="" placeholder="Search:" ng-model="query.name" class="search-query" />
                                 <select ng-model="selectedTemplate" ng-options="plan as plan.name for plan in templates  | filter:query"></select>
                             </div>
                         </div>
@@ -53,7 +48,6 @@
                 </form>
             </div>
             <div class="row">
-                <h2>Device Types</h2>
                 <form class="form-horizontal">
                     <fieldset ng-repeat="testplan in testplans">
                         <legend class="testplan">
@@ -67,13 +61,15 @@
                         <div class="control-group">
                             <label class="control-label">Device Type</label>
                             <div class="controls">
-                                <select ng-model="testplan.newDeviceType" ng-options="deviceType as deviceType.name for deviceType in testplan.template.deviceTypes"></select>
+                                <input type="text" class="span1" value="" placeholder="Search:" ng-model="newDeviceTypeQuery.name" class="search-query" />
+                                <select ng-model="testplan.newDeviceType" ng-options="deviceType as deviceType.name for deviceType in testplan.template.deviceTypes | filter:newDeviceTypeQuery"></select>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Hostname</label>
                             <div class="controls">
-                                <input type="text" ng-model="testplan.newHostname" />
+                                <input type="text" class="span1" value="" placeholder="Search:" ng-model="newDeviceHostnameQuery.hostname" class="search-query" />
+                                <select ng-model="testplan.newHostname" ng-options="device.hostname as device.hostname for device in devices | filter:newDeviceHostnameQuery"></select>
                             </div>
                         </div>
                         <div class="control-group">
@@ -185,14 +181,14 @@
             <ng-include src="'command_output_listitem.tpl'" ng-repeat="listItem in command.listItems"></ng-include>
         </div>
         <div ng-switch-default>
-            <div class="code" ng-bind-html-unsafe="displayCommand(command, command.value)" />
+            <div class="code" ng-bind-html-unsafe="displayCommand(command, commandValue(command.ui, command))" />
         </div>
     </ng-switch>
 </script>
 <script type="text/ng-template" id="command_output_listitem.tpl">
     <ng-switch on="command.ui">
         <div ng-switch-default>
-            <div class="code" ng-bind-html-unsafe="displayCommand(command, listItem.value)" />
+            <div class="code" ng-bind-html-unsafe="displayCommand(command, commandValue(command.listItemUi, listItem))" />
         </div>
     </ng-switch>
 </script>

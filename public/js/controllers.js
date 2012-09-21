@@ -159,11 +159,17 @@ function testplanGenerator($scope, $http) {
             newDeviceType = template.deviceTypes[0];
         }
         
+        var newHostname;
+        if ($scope.devices.length > 0) {
+            newHostname = $scope.devices[0].hostname;
+        }
+        
         $scope.testplans.push({
             "name": template.name,
             "devices": [],
             "template": template,
-            "newDeviceType": newDeviceType
+            "newDeviceType": newDeviceType,
+            "newHostname": newHostname
         });
     }
     
@@ -176,7 +182,6 @@ function testplanGenerator($scope, $http) {
             "name": testplan.newHostname,
             "commands": jQuery.extend(true, [], testplan.newDeviceType.commands)
         });
-        testplan.newHostname = '';
     }
     
     $scope.addListItem = function(command) {
