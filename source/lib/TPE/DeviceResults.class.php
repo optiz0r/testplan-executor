@@ -2,7 +2,7 @@
 
 class TPE_DeviceResults extends TPE_DatabaseObject {
     
-    protected static $table = 'deviceResults';
+    protected static $table = 'deviceresults';
     
     protected $_db_id;
     

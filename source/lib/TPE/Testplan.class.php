@@ -8,15 +8,14 @@ class TPE_Testplan extends TPE_DatabaseObject {
     protected $_db_created;
     protected $_db_owner;
     protected $_db_reference;
+    protected $_db_executionType;
     
-    protected function __contruct($owner, $reference) {
-        $this->created = time();
-        $this->owner = $owner;
-        $this->reference = $reference;
-    }
-    
-    public static function createForUser($owner, $reference) {
-        $newTestplan = new self($owner, $reference);
+    public static function createForUser($owner, $reference, $executionType) {
+        $newTestplan = new self();
+        $newTestplan->created = time();
+        $newTestplan->owner = $owner->id;
+        $newTestplan->reference = $reference;
+        $newTestplan->executionType = $executionType;
         $newTestplan->create();
         
         return $newTestplan;

@@ -2,7 +2,7 @@
 
 class TPE_DeviceScript extends TPE_DatabaseObject {
     
-    protected static $table = 'deviceScript';
+    protected static $table = 'devicescript';
     
     protected $_db_id;
     protected $_db_created;
@@ -11,16 +11,12 @@ class TPE_DeviceScript extends TPE_DatabaseObject {
     protected $_db_device;
     protected $_db_script;
     
-    protected function __construct(TPE_Testplan $testplan, TPE_Device $device, $script) {
-        $this->created = time();
-        
-        $this->testplan = $testplan->id;
-        $this->device = $device->id;
-        $this->script = $script;
-    }
-    
     public static function createForTestplan(TPE_Testplan $testplan, TPE_Device $device, $script) {
-        $newDeviceScript = new self($testplan, $device, $script);
+        $newDeviceScript = new self();
+        $newDeviceScript->created = time();
+        $newDeviceScript->testplan = $testplan->id;
+        $newDeviceScript->device = $device->id;
+        $newDeviceScript->script = $script;
         $newDeviceScript->create();
         
         return $newDeviceScript;

@@ -275,6 +275,70 @@ CREATE VIEW `permission_unmatchedusers` AS (
 );
 
 --
+-- Table structure for view `testplan`
+--
+DROP TABLE IF EXISTS `testplan`;
+CREATE TABLE `testplan` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    `created` INT UNSIGNED NOT NULL ,
+    `owner` INT UNSIGNED NOT NULL ,
+    `reference` VARCHAR( 32 ) NOT NULL ,
+    `executionType` TINYINT UNSIGNED NOT NULL
+) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+--
+-- Table structure for view `device`
+--
+DROP TABLE IF EXISTS `device`;
+CREATE TABLE  `device` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    `hostname` VARCHAR( 255 ) NOT NULL ,
+    `accessMethod` TINYINT UNSIGNED NOT NULL ,
+    `address` VARCHAR( 255 ) NOT NULL
+) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+--
+-- Table structure for view `devicescript`
+--
+DROP TABLE IF EXISTS `devicescript`;
+CREATE TABLE  `devicescript` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    `created` INT UNSIGNED NOT NULL ,
+    `testplan` INT UNSIGNED NOT NULL ,
+    `device` INT UNSIGNED NOT NULL ,
+    `script` TEXT NOT NULL
+) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+--
+-- Table structure for view `execution`
+--
+DROP TABLE IF EXISTS `execution`;
+CREATE TABLE  `execution` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    `created` INT UNSIGNED NOT NULL ,
+    `started` INT UNSIGNED NOT NULL ,
+    `completed` INT UNSIGNED NOT NULL ,
+    `owner` INT UNSIGNED NOT NULL
+) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+--
+-- Table structure for view `deviceresults`
+--
+DROP TABLE IF EXISTS `deviceresults`;
+CREATE TABLE  `deviceresults` (
+`id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`created` INT UNSIGNED NOT NULL ,
+`started` INT UNSIGNED NOT NULL ,
+`completed` INT UNSIGNED NOT NULL ,
+`owner` INT UNSIGNED NOT NULL ,
+`execution` INT UNSIGNED NOT NULL ,
+`devicescript` INT UNSIGNED NOT NULL ,
+`results` TEXT NOT NULL
+) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+--
 -- Constraints for table `grouppermission`
 --
 ALTER TABLE `grouppermission`
