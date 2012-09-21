@@ -6,6 +6,26 @@ function testplanGenerator($scope, $http) {
     $scope.selectedTemplate = undefined;
     
     $scope.testplans = [];
+    
+    $scope.executionTypes = [
+        {
+            value: 0,
+            label: "Generic"
+        },
+        {
+            value: 1,
+            label: "Build-time"
+        }, 
+        {
+            value: 2,
+            label: "Pre-change"
+        },
+        {
+            value: 3,
+            label: "Post-change"
+        }
+    ];
+    $scope.selectedExecutionType = $scope.executionTypes[0].value;
 
     $http.get(base_uri + 'js/commands.json').success(function(data) {
         $scope.commands = data;
@@ -81,6 +101,7 @@ function testplanGenerator($scope, $http) {
         
         $http.post(base_uri + 'ajax/api/queue-execution/', {
             reference: $scope.reference,
+            executionType: $scope.selectedExecutionType,
             devices: devices
         }).success(function(data, status, headers, config) {
             console.log(status, data);
