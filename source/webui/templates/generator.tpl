@@ -32,7 +32,7 @@
                         <div class="control-group">
                             <label class="control-label">Name</label>
                             <div class="controls">
-                            <input type="text" class="span1" value="" placeholder="Search:" ng-model="query.name" class="search-query" />
+                            <input type="text" value="" placeholder="Filter:" ng-model="query.name" class="search-query span1" />
                                 <select ng-model="selectedTemplate" ng-options="plan as plan.name for plan in templates  | filter:query"></select>
                             </div>
                         </div>
@@ -61,14 +61,14 @@
                         <div class="control-group">
                             <label class="control-label">Device Type</label>
                             <div class="controls">
-                                <input type="text" class="span1" value="" placeholder="Search:" ng-model="newDeviceTypeQuery.name" class="search-query" />
+                                <input type="text" value="" placeholder="Filter:" ng-model="newDeviceTypeQuery.name" class="search-query span1" />
                                 <select ng-model="testplan.newDeviceType" ng-options="deviceType as deviceType.name for deviceType in testplan.template.deviceTypes | filter:newDeviceTypeQuery"></select>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Hostname</label>
                             <div class="controls">
-                                <input type="text" class="span1" value="" placeholder="Search:" ng-model="newDeviceHostnameQuery.hostname" class="search-query" />
+                                <input type="text" value="" placeholder="Filter:" ng-model="newDeviceHostnameQuery.hostname" class="search-query span1" />
                                 <select ng-model="testplan.newHostname" ng-options="device.hostname as device.hostname for device in devices | filter:newDeviceHostnameQuery"></select>
                             </div>
                         </div>
