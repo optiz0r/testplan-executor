@@ -16,7 +16,7 @@
         </div>
             
         <div class="span1 icon">
-            <i class="icon-time"></i>
+            <i class="icon-list"></i>
         </div>
         <div class="span5">
             <a href="{$base_uri}history/" title="Manage Testplan Execution History"><h2>Execution History</h2></a>
