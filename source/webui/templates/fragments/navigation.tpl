@@ -4,12 +4,12 @@
     {if $authenticated && $auth->isAdministrator()}
         <li class="dropdown {if $requested_page == "admin"}active{/if}">
             <a href="{$base_uri}admin/" class="dropdown-toggle" data-toggle="dropdown" data-target="#" title="Admin">
-                Admin
+                <i class="icon-cog icon-white"></i> Admin
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="{$base_uri}admin/testplans/" title="Manage Available Testplans">Testplans</a></li>
-                <li><a href="{$base_uri}admin/history/" title="Manage Execution History">Execution History</a></li>
+                <li><a href="{$base_uri}admin/testplans/" title="Manage Available Testplans"><i class="icon-file"></i> Testplans</a></li>
+                <li><a href="{$base_uri}admin/history/" title="Manage Execution History"><i class="icon-list"></i> Execution History</a></li>
                 <li><a href="{$base_uri}admin/settings/" title="Manage Settings"><i class="icon-cog"></i> Settings</a></li>
             </ul>
         </li>

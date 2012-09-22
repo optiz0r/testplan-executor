@@ -114,7 +114,7 @@
                     </div>
                 </div>
             </div>
-            <button ng-click="executeTestplan()" class="btn btn-primary">Execute Testplan</button>
+            <button ng-click="executeTestplan()" class="btn btn-primary"><i class="icon-play icon-white"></i> Execute Testplan</button>
         </div>
     </div>
 </div>
