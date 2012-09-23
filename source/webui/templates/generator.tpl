@@ -32,7 +32,7 @@
                         <div class="control-group">
                             <label class="control-label">Name</label>
                             <div class="controls">
-                            <input type="text" value="" placeholder="Filter:" ng-model="query.name" class="search-query span1" />
+                                <input type="text" value="" placeholder="Filter:" ng-model="query.name" class="search-query span1" />
                                 <select ng-model="selectedTemplate" ng-options="plan as plan.name for plan in templates  | filter:query"></select>
                             </div>
                         </div>
