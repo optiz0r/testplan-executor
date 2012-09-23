@@ -10,6 +10,7 @@
         
         <!-- JQuery //-->
         <script src="{$base_uri}lib/jquery/js/jquery-1.8.1.min.js"></script>
+        <script type="text/javascript" src="{$base_uri}lib/jquery/js/jquery.timeago.js"></script>
 
         <!-- Bootstrap //-->
         <link rel="stylesheet" type="text/css" href="{$base_uri}lib/bootstrap/css/bootstrap.min.css" />
