@@ -200,3 +200,22 @@ function testplanGenerator($scope, $http) {
     }
 }
 
+function testplanHistory($scope, $http) {
+    
+    $scope.testplans = [];
+    
+    $http.get(base_uri + 'ajax/api/list-testplans/').success(function(data) {
+        $scope.testplans = data.testplans;
+        if ($scope.testplans.length > 0) {
+            $scope.selectedTestplan = $scope.testplans[0];
+            if ($scope.selectedTestplan.executions.length > 0) {
+                $scope.selectedTestplan.selectedExecution = $scope.selectedTestplan.executions[0];
+                if ($scope.selectedTestplan.selectedExecution.deviceResults.length > 0) {
+                    $scope.selectedTestplan.selectedExecution.selectedDeviceResults = $scope.selectedTestplan.selectedExecution.deviceResults[0];
+                }
+            }
+        }
+    }).error(function(data, status, headers, config) {
+        console.log(status, data);
+    });
+}
