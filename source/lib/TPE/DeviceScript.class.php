@@ -21,6 +21,10 @@ class TPE_DeviceScript extends TPE_DatabaseObject {
         
         return $newDeviceScript;
     }
+    
+    public static function allForTestplan(TPE_Testplan $testplan) {
+        return static::allFor('testplan', $testplan->id);
+    }
 
 }
 

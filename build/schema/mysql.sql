@@ -282,8 +282,7 @@ CREATE TABLE `testplan` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     `created` INT UNSIGNED NOT NULL ,
     `owner` INT UNSIGNED NOT NULL ,
-    `reference` VARCHAR( 32 ) NOT NULL ,
-    `executionType` TINYINT UNSIGNED NOT NULL
+    `reference` VARCHAR( 32 ) NOT NULL
 ) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 --
@@ -319,7 +318,8 @@ CREATE TABLE  `execution` (
     `created` INT UNSIGNED NOT NULL ,
     `started` INT UNSIGNED NOT NULL ,
     `completed` INT UNSIGNED NOT NULL ,
-    `owner` INT UNSIGNED NOT NULL
+    `owner` INT UNSIGNED NOT NULL ,
+    `executionType` TINYINT UNSIGNED NOT NULL
 ) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
@@ -334,7 +334,7 @@ CREATE TABLE  `deviceresults` (
 `completed` INT UNSIGNED NOT NULL ,
 `owner` INT UNSIGNED NOT NULL ,
 `execution` INT UNSIGNED NOT NULL ,
-`devicescript` INT UNSIGNED NOT NULL ,
+`deviceScript` INT UNSIGNED NOT NULL ,
 `results` TEXT NOT NULL
 ) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
