@@ -27,3 +27,5 @@ try {
 $this->smarty->assign('messages', $messages);
 $this->smarty->assign('success', $success);
 $this->smarty->assign('devices', $deviceList);
+
+?>
