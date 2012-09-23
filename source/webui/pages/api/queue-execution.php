@@ -30,12 +30,14 @@ try {
         throw new TPE_Exception_InvalidParameters('data.executionType');
     }
     
-    $testplan = TPE_Testplan::createForUser($user, $data->reference, $data->executionType);
+    $testplan = TPE_Testplan::createForUser($user, $data->reference);
     
     foreach ($data->devices as $details) {
         $device = TPE_Device::createFromHostname($details->hostname);
         $testplan->addDeviceScript($device, implode("\n", $details->script));
     }
+    
+    $execution = TPE_Execution::createForTestplan($testplan, $user, $data->executionType);
     
     $success = true;
 
