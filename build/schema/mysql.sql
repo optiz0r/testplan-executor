@@ -316,9 +316,10 @@ DROP TABLE IF EXISTS `execution`;
 CREATE TABLE  `execution` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     `created` INT UNSIGNED NOT NULL ,
-    `started` INT UNSIGNED NOT NULL ,
-    `completed` INT UNSIGNED NOT NULL ,
+    `started` INT UNSIGNED NULL ,
+    `completed` INT UNSIGNED NULL ,
     `owner` INT UNSIGNED NOT NULL ,
+    `testplan` INT UNSIGNED NOT NULL,
     `executionType` TINYINT UNSIGNED NOT NULL
 ) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
@@ -330,12 +331,12 @@ DROP TABLE IF EXISTS `deviceresults`;
 CREATE TABLE  `deviceresults` (
 `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `created` INT UNSIGNED NOT NULL ,
-`started` INT UNSIGNED NOT NULL ,
-`completed` INT UNSIGNED NOT NULL ,
+`started` INT UNSIGNED NULL ,
+`completed` INT UNSIGNED NULL ,
 `owner` INT UNSIGNED NOT NULL ,
 `execution` INT UNSIGNED NOT NULL ,
 `deviceScript` INT UNSIGNED NOT NULL ,
-`results` TEXT NOT NULL
+`results` TEXT NULL
 ) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 --
