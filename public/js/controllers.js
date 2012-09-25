@@ -1,4 +1,4 @@
-function testplanGenerator($scope, $http) {
+function testplanGenerator($scope, $http, base_uri, base_url, executionTypes, ui) {
     
     $scope.dev = true;
     
@@ -10,28 +10,14 @@ function testplanGenerator($scope, $http) {
     
     $scope.testplans = [];
     
-    $scope.executionTypes = [
-        {
-            value: 0,
-            label: "Generic"
-        },
-        {
-            value: 1,
-            label: "Build-time"
-        }, 
-        {
-            value: 2,
-            label: "Pre-change"
-        },
-        {
-            value: 3,
-            label: "Post-change"
-        }
-    ];
-    $scope.selectedExecutionType = $scope.executionTypes[0].value;
+    $scope.executionTypes = executionTypes;
+    if ($scope.executionTypes.length > 0) {
+        $scope.selectedExecutionType = $scope.executionTypes[0].value;
+    }
 
     $http.get(base_uri + 'ajax/api/list-commands/').success(function(data) {
         $scope.commands = data.commands;
+        console.log($scope.commands);
     });
     
     $http.get(base_uri + 'ajax/api/list-devices/').success(function(data) {
@@ -200,7 +186,7 @@ function testplanGenerator($scope, $http) {
     }
 }
 
-function testplanHistory($scope, $http) {
+function testplanHistory($scope, $http, base_uri, base_url) {
     
     $scope.testplans = [];
     
