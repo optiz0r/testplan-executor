@@ -365,6 +365,40 @@ INSERT INTO `command` (`id`, `name`, `parameters`) VALUES
 (9, "show_vlan", "show vlan id\n%0");
 
 --
+-- Table structure for table `template_testplan`
+--
+DROP TABLE IF EXISTS `template_testplan`;
+CREATE TABLE  `template_testplan` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    `name` VARCHAR( 255 ) NOT NULL
+) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+--
+-- Table structure for table `template_devicetype`
+--
+DROP TABLE IF EXISTS `template_devicetype`;
+CREATE TABLE  `template_devicetype` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    `template_testplan` INT UNSIGNED NOT NULL ,
+    `name` VARCHAR( 255 ) NOT NULL
+) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+--
+-- Table structure for table `template_command`
+--
+DROP TABLE IF EXISTS `template_command`;
+CREATE TABLE  `template_command` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    `template_devicetype` INT UNSIGNED NOT NULL ,
+    `command` INT UNSIGNED NOT NULL ,
+    `hidden` TINYINT UNSIGNED NOT NULL ,
+    `ui` TINYINT UNSIGNED NOT NULL ,
+    `label` VARCHAR( 255 ) NOT NULL ,
+    `listItemUi` TINYINT UNSIGNED NULL ,
+) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+--
 -- Constraints for table `grouppermission`
 --
 ALTER TABLE `grouppermission`
