@@ -137,6 +137,7 @@
                 <ng-include src="'command_input_newlistitem.tpl'"></ng-include>
             </div>
         </div>
+        <div ng-switch-default>unsupported ui: {literal}{{command.ui}}{/literal}</div>
     </ng-switch>
 </script>
 <script type="text/ng-template" id="command_input_listitem.tpl">

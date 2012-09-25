@@ -1,4 +1,4 @@
-function testplanGenerator($scope, $http, base_uri, base_url, executionTypes, ui) {
+function testplanGenerator($scope, $http, base_uri, base_url, executionTypes) {
     
     $scope.dev = true;
     
@@ -17,36 +17,23 @@ function testplanGenerator($scope, $http, base_uri, base_url, executionTypes, ui
 
     $http.get(base_uri + 'ajax/api/list-commands/').success(function(data) {
         $scope.commands = data.commands;
-        console.log($scope.commands);
     });
     
     $http.get(base_uri + 'ajax/api/list-devices/').success(function(data) {
         $scope.devices = data.devices;
     });
     
-    $http.get(base_uri + 'js/templates.json').success(function(data) {
-        $scope.templates = data;
+    $http.get(base_uri + 'ajax/api/list-templates/').success(function(data) {
+        $scope.templates = data.templates;
         if ($scope.templates.length > 0) {
             $scope.selectedTemplate = $scope.templates[0];
-            
-            if ($scope.dev) {
-                $scope.reference = "GZ:C123456";
-                $scope.selectedExecutionType = 2;
-                
-                $scope.addTemplate($scope.templates[0]);
-                
-                $scope.testplans[0].newDeviceType = $scope.templates[0].deviceTypes[0];
-                $scope.testplans[0].newHostname = "SwitchA";
-                $scope.addDevice($scope.testplans[0]);
-                
-                $scope.testplans[0].devices[0].commands[1].newListItemValue = "GigabitEthernet1/1";
-                $scope.testplans[0].devices[0].commands[3].newListItemValue = 123;
-                $scope.addListItem($scope.testplans[0].devices[0].commands[1]);
-                $scope.addListItem($scope.testplans[0].devices[0].commands[3]);
-            }
         }
     });
     
+    $http.get(base_uri + 'js/dev.json').success(function(data) {
+        $scope.testplans = data;
+    });
+
     $scope.displayCommand = function(command, parameters) {
         var output = '<div class="code">';
         output += $scope.generateCommand(command, parameters);
@@ -136,7 +123,7 @@ function testplanGenerator($scope, $http, base_uri, base_url, executionTypes, ui
     }
     
     $scope.nothidden = function(input) {
-        return ! (input && input.hidden);
+        return ! (input && input.hidden == 1);
     }
     
     $scope.addTemplate = function(template) {

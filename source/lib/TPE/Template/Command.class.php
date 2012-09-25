@@ -11,6 +11,9 @@ class TPE_Template_Command extends TPE_DatabaseObject {
     protected $_db_label;
     protected $_db_listItemUi;
     
+    public static function allForDeviceType(TPE_Template_DeviceType $deviceType) {
+        return static::allFor('template_deviceType', $deviceType->id, null, null, null, 'order', TPE_DatabaseObject::ORDER_ASC);
+    }
 }
 
 ?>

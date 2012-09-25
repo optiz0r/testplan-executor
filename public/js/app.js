@@ -21,9 +21,3 @@ tpe.value('executionTypes', [
         label: "Post-change"
     }
 ]);
-
-tpe.value('ui', {
-    list: 0,
-    text: 1,
-    number: 2
-});

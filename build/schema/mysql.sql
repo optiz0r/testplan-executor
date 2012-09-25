@@ -370,7 +370,8 @@ INSERT INTO `command` (`id`, `name`, `parameters`) VALUES
 DROP TABLE IF EXISTS `template_testplan`;
 CREATE TABLE  `template_testplan` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-    `name` VARCHAR( 255 ) NOT NULL
+    `name` VARCHAR( 255 ) NOT NULL ,
+    `order` TINYINT UNSIGNED NULL
 ) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 --
@@ -380,7 +381,8 @@ DROP TABLE IF EXISTS `template_devicetype`;
 CREATE TABLE  `template_devicetype` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     `template_testplan` INT UNSIGNED NOT NULL ,
-    `name` VARCHAR( 255 ) NOT NULL
+    `name` VARCHAR( 255 ) NOT NULL ,
+    `order` TINYINT UNSIGNED NULL
 ) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 --
@@ -392,9 +394,10 @@ CREATE TABLE  `template_command` (
     `template_devicetype` INT UNSIGNED NOT NULL ,
     `command` INT UNSIGNED NOT NULL ,
     `hidden` TINYINT UNSIGNED NOT NULL ,
-    `ui` TINYINT UNSIGNED NOT NULL ,
-    `label` VARCHAR( 255 ) NOT NULL ,
-    `listItemUi` TINYINT UNSIGNED NULL ,
+    `ui` VARCHAR( 255 ) UNSIGNED NULL ,
+    `label` VARCHAR( 255 ) NULL ,
+    `listItemUi` VARCHAR( 255 ) UNSIGNED NULL  ,
+    `order` TINYINT UNSIGNED NULL
 ) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
