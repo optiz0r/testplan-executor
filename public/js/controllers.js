@@ -30,8 +30,8 @@ function testplanGenerator($scope, $http) {
     ];
     $scope.selectedExecutionType = $scope.executionTypes[0].value;
 
-    $http.get(base_uri + 'js/commands.json').success(function(data) {
-        $scope.commands = data;
+    $http.get(base_uri + 'ajax/api/list-commands/').success(function(data) {
+        $scope.commands = data.commands;
     });
     
     $http.get(base_uri + 'ajax/api/list-devices/').success(function(data) {

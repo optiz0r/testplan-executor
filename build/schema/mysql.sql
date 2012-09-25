@@ -275,7 +275,7 @@ CREATE VIEW `permission_unmatchedusers` AS (
 );
 
 --
--- Table structure for view `testplan`
+-- Table structure for table `testplan`
 --
 DROP TABLE IF EXISTS `testplan`;
 CREATE TABLE `testplan` (
@@ -286,7 +286,7 @@ CREATE TABLE `testplan` (
 ) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 --
--- Table structure for view `device`
+-- Table structure for table `device`
 --
 DROP TABLE IF EXISTS `device`;
 CREATE TABLE  `device` (
@@ -298,7 +298,7 @@ CREATE TABLE  `device` (
 
 
 --
--- Table structure for view `devicescript`
+-- Table structure for table `devicescript`
 --
 DROP TABLE IF EXISTS `devicescript`;
 CREATE TABLE  `devicescript` (
@@ -310,7 +310,7 @@ CREATE TABLE  `devicescript` (
 ) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 --
--- Table structure for view `execution`
+-- Table structure for table `execution`
 --
 DROP TABLE IF EXISTS `execution`;
 CREATE TABLE  `execution` (
@@ -325,7 +325,7 @@ CREATE TABLE  `execution` (
 
 
 --
--- Table structure for view `deviceresults`
+-- Table structure for table `deviceresults`
 --
 DROP TABLE IF EXISTS `deviceresults`;
 CREATE TABLE  `deviceresults` (
@@ -338,6 +338,31 @@ CREATE TABLE  `deviceresults` (
 `deviceScript` INT UNSIGNED NOT NULL ,
 `results` TEXT NULL
 ) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+--
+-- Table structure for table `command`
+-- 
+DROP TABLE IF EXISTS `command`;
+CREATE TABLE  `command` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    `name` VARCHAR( 255 ) NOT NULL ,
+    `parameters` TEXT NOT NULL ,
+    INDEX (  `name` )
+) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+--
+-- Data for table `command`
+--
+INSERT INTO `command` (`id`, `name`, `parameters`) VALUES
+(1,"comment", "!\n%0"),
+(2, "show_run", "show running-config"),
+(3, "show_run_int", "show running interface\n%0"),
+(4, "show_interfaces", "show interfaces"),
+(5, "show_int", "show interface\n%0"),
+(6, "show_spanningtree", "show spanning-tree"),
+(7, "show_spanningtree_vlan", "show spanning-tree vlan\n%0"),
+(8, "show_vlans", "show vlans"),
+(9, "show_vlan", "show vlan id\n%0");
 
 --
 -- Constraints for table `grouppermission`
