@@ -12,9 +12,7 @@ try {
     $commands = TPE_Command::all();
     
     foreach ($commands as $command) {
-        $commandList[] = array(
-            $command->name => explode("\n", $command->parameters),
-        );
+        $commandList[$command->name] = explode("\n", $command->parameters);
     }
     
     $success = true;
