@@ -31,7 +31,9 @@ function testplanGenerator($scope, $http, base_uri, base_url, executionTypes) {
     });
     
     $http.get(base_uri + 'js/dev.json').success(function(data) {
-        $scope.testplans = data;
+        $scope.reference = data.reference;
+        $scope.selectedExecutionType = data.executionType;
+        $scope.testplans = data.testplans;
     });
 
     $scope.displayCommand = function(command, parameters) {
