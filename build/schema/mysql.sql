@@ -394,9 +394,9 @@ CREATE TABLE  `template_command` (
     `template_devicetype` INT UNSIGNED NOT NULL ,
     `command` INT UNSIGNED NOT NULL ,
     `hidden` TINYINT UNSIGNED NOT NULL ,
-    `ui` VARCHAR( 255 ) UNSIGNED NULL ,
+    `ui` VARCHAR( 255 ) NULL ,
     `label` VARCHAR( 255 ) NULL ,
-    `listItemUi` VARCHAR( 255 ) UNSIGNED NULL  ,
+    `listItemUi` VARCHAR( 255 ) NULL  ,
     `order` TINYINT UNSIGNED NULL
 ) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
