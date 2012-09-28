@@ -18,7 +18,7 @@
                     <div class="control-group">
                         <label class="control-label">References</label>
                         <div class="controls">
-                            <select size="6" ng-model="selectedTestplan" ng-options="testplan as testplan.reference for testplan in testplans | filter:testplanQuery" ></select>
+                            <select size="6" ng-model="selectedTestplan" ng-options="testplan as testplan.reference for testplan in testplans | filter:testplanQuery" ng-click="refreshExecutions()"></select>
                         </div>
                     </div>
                 </fieldset>
@@ -34,6 +34,30 @@
                 <dt>Created By</dt>
                 <dd>TBC</dd>
             </dl>
+
+            <form class="form-horizontal">
+                <fieldset>
+                    <legend>Re-run Testplan</legend>
+                    <div class="control-group">
+                        <label class="control-label">Execution Type</label>
+                        <div class="controls">
+                            <label class="radio" ng-repeat="type in executionTypes">
+                                <input type="radio" name="executionType" value="{literal}{{type.value}}{/literal}" ng-model="selectedExecutionType" ng-checked="type.value == selectedExecutionType">
+                                {literal}{{type.label}}{/literal}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"></label>
+                        <div class="controls">
+                            <button class="btn btn-primary" ng-click="rerunTestplan(selectedTestplan)">
+                                <i class="icon-refresh"></i>
+                                Execute Testplan
+                            </button> 
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
     
@@ -53,7 +77,7 @@
                     <div class="control-group">
                         <label class="control-label">Created</label>
                         <div class="controls">
-                            <select size="6" ng-model="selectedTestplan.selectedExecution" ng-options="execution as execution.created for execution in selectedTestplan.executions | filter:executionQuery" ></select>
+                            <select size="6" ng-model="selectedTestplan.selectedExecution" ng-options="execution as execution.created for execution in selectedTestplan.executions | filter:executionQuery" ng-change="refreshDevices()"></select>
                         </div>
                     </div>
                 </fieldset>
@@ -75,6 +99,22 @@
                 <dt>Type</dt>
                 <dd>TBC</dd>
             </dl>
+
+            <form class="form-horizontal">
+                <fieldset>
+                    <legend>Download all results</legend>
+                    
+                    <div class="control-group">
+                        <label class="control-label"></label>
+                        <div class="controls">
+                            <button class="btn btn-secondary" ng-click="downloadExecutionResults(selectedTestplan.selectedExecution)">
+                                <i class="icon-download-alt"></i>
+                                Download as zip file
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
 
@@ -106,6 +146,22 @@
             <div class="well">
                 <div class="code">{literal}{{selectedTestplan.selectedExecution.selectedDeviceResults.results}}{/literal}</div>
             </div>
+
+            <form class="form-horizontal">
+                <fieldset>
+                    <legend>Download device results</legend>
+                    
+                    <div class="control-group">
+                        <label class="control-label"></label>
+                        <div class="controls">
+                            <button class="btn btn-secondary" ng-click="downloadDeviceResults(selectedTestplan.selectedExecution.selectedDeviceResults)">
+                                <i class="icon-download-alt"></i>
+                                Download as text file
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
 </div>

@@ -175,10 +175,15 @@ function testplanGenerator($scope, $http, base_uri, base_url, executionTypes) {
     }
 }
 
-function testplanHistory($scope, $http, base_uri, base_url) {
+function testplanHistory($scope, $http, base_uri, base_url, executionTypes) {
     
     $scope.testplans = [];
     
+    $scope.executionTypes = executionTypes;
+    if ($scope.executionTypes.length > 0) {
+        $scope.selectedExecutionType = $scope.executionTypes[0].value;
+    }
+
     $http.get(base_uri + 'ajax/api/list-testplans/').success(function(data) {
         $scope.testplans = data.testplans;
         if ($scope.testplans.length > 0) {
@@ -193,4 +198,36 @@ function testplanHistory($scope, $http, base_uri, base_url) {
     }).error(function(data, status, headers, config) {
         console.log(status, data);
     });
+
+    $scope.refreshExecutions = function() {
+        if ($scope.selectedTestplan.executions.length > 0) {
+            $scope.selectedTestplan.selectedExecution = $scope.selectedTestplan.executions[0]; 
+            $scope.refreshDevices();
+        }
+    }
+
+    $scope.refreshDevices = function() {
+        if ($scope.selectedTestplan.selectedExecution.deviceResults.length > 0) {
+            $scope.selectedTestplan.selectedExecution.selectedDeviceResults = $scope.selectedTestplan.selectedExecution.deviceResults[0];
+        }
+    }
+
+    $scope.rerunTestplan = function(testplan) {
+        $http.post(base_uri + 'ajax/api/queue-execution/refresh/', {
+            executionType: $scope.selectedExecutionType,
+            testplanId: testplan.id
+        }).success(function(data, status, headers, config) {
+            console.log(status, data);
+        }).error(function(data, status, headers, config) {
+            console.log(status, data);
+        });        
+    }
+
+    $scope.downloadExecutionResults = function(execution) {
+        console.log("TODO");
+    }
+
+    $scope.downloadDeviceResults = function(deviceResults) {
+        console.log("TODO");
+    }
 }
