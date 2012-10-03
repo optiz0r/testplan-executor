@@ -41,6 +41,16 @@
     .device {
         font-style: italic;
     }
+    
+    .dialog-footer-buttonset {
+        display: none;
+    }
+    
+    .dialog-footer-buttonset fieldset {
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
 
 } 
 

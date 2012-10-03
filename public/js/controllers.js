@@ -1,41 +1,43 @@
 function testplanGenerator($scope, $http, base_uri, base_url, executionTypes) {
     
-    $scope.dev = true;
-    
-    $scope.commands = {};
-    $scope.devices = [];
-    
-    $scope.templates = [];
-    $scope.selectedTemplate = undefined;
-    
-    $scope.testplans = [];
-    
-    $scope.executionTypes = executionTypes;
-    if ($scope.executionTypes.length > 0) {
-        $scope.selectedExecutionType = $scope.executionTypes[0].value;
-    }
-
-    $http.get(base_uri + 'ajax/api/list-commands/').success(function(data) {
-        $scope.commands = data.commands;
-    });
-    
-    $http.get(base_uri + 'ajax/api/list-devices/').success(function(data) {
-        $scope.devices = data.devices;
-    });
-    
-    $http.get(base_uri + 'ajax/api/list-templates/').success(function(data) {
-        $scope.templates = data.templates;
-        if ($scope.templates.length > 0) {
-            $scope.selectedTemplate = $scope.templates[0];
+    $scope.init = function() {
+        $scope.dev = true;
+        
+        $scope.commands = {};
+        $scope.devices = [];
+        
+        $scope.templates = [];
+        $scope.selectedTemplate = undefined;
+        
+        $scope.testplans = [];
+        
+        $scope.executionTypes = executionTypes;
+        if ($scope.executionTypes.length > 0) {
+            $scope.selectedExecutionType = $scope.executionTypes[0].value;
         }
-    });
-    
-    $http.get(base_uri + 'js/dev.json').success(function(data) {
-        $scope.reference = data.reference;
-        $scope.selectedExecutionType = data.executionType;
-        $scope.testplans = data.testplans;
-    });
 
+        $http.get(base_uri + 'ajax/api/list-commands/').success(function(data) {
+            $scope.commands = data.commands;
+        });
+        
+        $http.get(base_uri + 'ajax/api/list-devices/').success(function(data) {
+            $scope.devices = data.devices;
+        });
+        
+        $http.get(base_uri + 'ajax/api/list-templates/').success(function(data) {
+            $scope.templates = data.templates;
+            if ($scope.templates.length > 0) {
+                $scope.selectedTemplate = $scope.templates[0];
+            }
+        });
+        
+        $http.get(base_uri + 'js/dev.json').success(function(data) {
+            $scope.reference = data.reference;
+            $scope.selectedExecutionType = data.executionType;
+            $scope.testplans = data.testplans;
+        });
+    };
+    
     $scope.displayCommand = function(command, parameters) {
         var output = '<div class="code">';
         output += $scope.generateCommand(command, parameters);
@@ -112,7 +114,7 @@ function testplanGenerator($scope, $http, base_uri, base_url, executionTypes) {
         }).success(function(data, status, headers, config) {
             console.log(status, data);
         }).error(function(data, status, headers, config) {
-            console.log(status, data);
+            sf.ajax.failure(data, status, config);
         });
     }
     
@@ -173,31 +175,39 @@ function testplanGenerator($scope, $http, base_uri, base_url, executionTypes) {
     $scope.removeListItem = function(command, index) {
         command.listItems.splice(index, 1);
     }
+    
+    $scope.init();
 }
 
 function testplanHistory($scope, $http, base_uri, base_url, executionTypes) {
     
-    $scope.testplans = [];
+    $scope.init = function() {
+        $scope.testplans = [];
+        
+        $scope.executionTypes = executionTypes;
+        if ($scope.executionTypes.length > 0) {
+            $scope.selectedExecutionType = $scope.executionTypes[0].value;
+        }
     
-    $scope.executionTypes = executionTypes;
-    if ($scope.executionTypes.length > 0) {
-        $scope.selectedExecutionType = $scope.executionTypes[0].value;
+        $scope.fetchTestplans();
     }
 
-    $http.get(base_uri + 'ajax/api/list-testplans/').success(function(data) {
-        $scope.testplans = data.testplans;
-        if ($scope.testplans.length > 0) {
-            $scope.selectedTestplan = $scope.testplans[0];
-            if ($scope.selectedTestplan.executions.length > 0) {
-                $scope.selectedTestplan.selectedExecution = $scope.selectedTestplan.executions[0];
-                if ($scope.selectedTestplan.selectedExecution.deviceResults.length > 0) {
-                    $scope.selectedTestplan.selectedExecution.selectedDeviceResults = $scope.selectedTestplan.selectedExecution.deviceResults[0];
+    $scope.fetchTestplans = function() {
+        $http.get(base_uri + 'ajax/api/list-testplans/').success(function(data) {
+            $scope.testplans = data.testplans;
+            if ($scope.testplans.length > 0) {
+                $scope.selectedTestplan = $scope.testplans[0];
+                if ($scope.selectedTestplan.executions.length > 0) {
+                    $scope.selectedTestplan.selectedExecution = $scope.selectedTestplan.executions[0];
+                    if ($scope.selectedTestplan.selectedExecution.deviceResults.length > 0) {
+                        $scope.selectedTestplan.selectedExecution.selectedDeviceResults = $scope.selectedTestplan.selectedExecution.deviceResults[0];
+                    }
                 }
             }
-        }
-    }).error(function(data, status, headers, config) {
-        console.log(status, data);
-    });
+        }).error(function(data, status, headers, config) {
+            sf.ajax.failure(data, status, config);
+        });
+    };
 
     $scope.refreshExecutions = function() {
         if ($scope.selectedTestplan.executions.length > 0) {
@@ -217,9 +227,10 @@ function testplanHistory($scope, $http, base_uri, base_url, executionTypes) {
             executionType: $scope.selectedExecutionType,
             testplanId: testplan.id
         }).success(function(data, status, headers, config) {
-            console.log(status, data);
+            sf.ajax.success(data, status, config);
+            $scope.fetchTestplans();
         }).error(function(data, status, headers, config) {
-            console.log(status, data);
+            sf.ajax.failure(data, status, config);
         });        
     }
 
@@ -230,4 +241,6 @@ function testplanHistory($scope, $http, base_uri, base_url, executionTypes) {
     $scope.downloadDeviceResults = function(deviceResults) {
         console.log("TODO");
     }
+    
+    $scope.init();
 }

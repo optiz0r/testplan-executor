@@ -14,11 +14,12 @@ try {
     
     foreach ($testplans as $testplan) {
         $testplanListItem = array(
-            "created" => $testplan->created,
-            "owner" => null,
-            "reference" => $testplan->reference,
-            "deviceScripts" => array(),
-            "executions" => array(),
+            'id' => $testplan->id,
+            'created' => $testplan->created,
+            'owner' => null,
+            'reference' => $testplan->reference,
+            'deviceScripts' => array(),
+            'executions' => array(),
         );
         
         // Add deviceScripts
@@ -28,11 +29,12 @@ try {
             $device = TPE_Device::fromId($deviceScript->device);
             
             $deviceScriptListItem = array(
-                "created" => $deviceScript->created,
-                "device" => array(
-                    "hostname" => $device->hostname
+                'id' => $deviceScript->id,
+                'created' => $deviceScript->created,
+                'device' => array(
+                    'hostname' => $device->hostname
                 ),
-                "script" => $deviceScript->script,
+                'script' => $deviceScript->script,
             );
             
             $deviceScriptsMap[$deviceScript->id] = $deviceScriptListItem;
@@ -43,6 +45,7 @@ try {
         $executions = TPE_Execution::allForTestplan($testplan);
         foreach ($executions as $execution) {
             $executionListItem = array(
+                'id' => $execution->id,
                 'created' => $execution->created,
                 'started' => $execution->started,
                 'completed' => $execution->completed,
