@@ -12,6 +12,18 @@ class TPE_DeviceHandler_PluginFactory extends TPE_PluginFactory {
         
     }
     
+    public static function create($plugin, $options) {
+        self::ensureScanned();
+    
+        if (! self::isValidPlugin($plugin)) {
+            throw new TPE_Exception_InvalidPluginName($plugin);
+        }
+    
+        $classname = self::classname($plugin);
+    
+        return call_user_func(array($classname, 'create'), $options);
+    }
+
 }
 
 ?>
