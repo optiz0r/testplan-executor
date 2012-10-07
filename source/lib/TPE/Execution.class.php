@@ -36,6 +36,34 @@ class TPE_Execution extends TPE_DatabaseObject {
         return static::allFor('testplan', $testplan->id);
     }
     
+    public function deviceResults() {
+        if ($this->deviceResults === null) {
+            $this->deviceResults = TPE_DeviceResults::allForExecution($this);
+        }
+        
+        return $this->deviceResults;
+    }
+    
+    public function run() {
+        $this->started = time();
+        
+        $deviceResultsSet = $this->deviceResults();
+        foreach ($deviceResultsSet as $deviceResults) {
+            $deviceScript = TPE_DeviceScript::fromId($deviceResults->deviceScript);
+            $device = TPE_Device::fromId($deviceScript->device);
+            $accessMethod = TPE_AccessMethod::fromId($device->accessMethod);
+            
+            $plugin = TPE_DeviceHandler_PluginFactory::create($accessMethod->plugin, json_decode($accessMethod->options));
+            
+            $deviceResults->started = time();
+            $plugin->execute($device, $deviceScript, $deviceResults);
+            $deviceResults->completed = time();
+            $deviceResults->save();
+        }
+        
+        $this->completed = time();
+        $this->save();
+    }
 }
 
 ?>
