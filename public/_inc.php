@@ -4,6 +4,10 @@ if (isset($_SERVER['TPE_CONFIG']) &&
     file_exists($_SERVER['TPE_CONFIG']) &&
     is_readable($_SERVER['TPE_CONFIG'])) {
     require_once($_SERVER['TPE_CONFIG']);
+} elseif (isset($_ENV['TPE_CONFIG']) &&
+    file_exists($_ENV['TPE_CONFIG']) &&
+    is_readable($_ENV['TPE_CONFIG'])) {
+    require_once($_ENV['TPE_CONFIG']);
 } else {
     require_once '/etc/testplan-executor/config.php';
 }
