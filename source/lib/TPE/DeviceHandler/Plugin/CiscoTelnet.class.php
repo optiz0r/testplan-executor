@@ -1,6 +1,6 @@
 <?php
 
-class RippingCluster_Source_Plugin_MkvInfo extends RippingCluster_PluginBase implements RippingCluster_Source_IPlugin {
+class TPE_DeviceHandler_Plugin_CiscoTelnet extends TPE_PluginBase implements TPE_DeviceHandler_IPlugin {
     
     /**
      * Name of this plugin
@@ -8,8 +8,12 @@ class RippingCluster_Source_Plugin_MkvInfo extends RippingCluster_PluginBase imp
      */
     const PLUGIN_NAME = 'CiscoTelnet';
     
-    public function init($options) {
+    public static function init() {
         
+    }
+    
+    public static function create($options) {
+        return new self($options);
     }
     
     public function execute() {
