@@ -400,6 +400,16 @@ CREATE TABLE  `template_command` (
     `order` TINYINT UNSIGNED NULL
 ) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+--
+-- Table structure for table `accessmethod`
+--
+CREATE TABLE  `accessmethod` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    `name` VARCHAR( 255 ) NOT NULL ,
+    `description` TEXT NOT NULL ,
+    `plugin` VARCHAR( 255 ) NOT NULL ,
+    `options` TEXT NOT NULL
+) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 --
 -- Constraints for table `grouppermission`
